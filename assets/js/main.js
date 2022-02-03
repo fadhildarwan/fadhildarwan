@@ -92,40 +92,63 @@ modalCloses.forEach((modalClose) =>{
     })
 })
 
-/* ================== DESIGN SWIPER ================== */
-var swiper = new Swiper(".designSwiper", {
-    slidesPerView: 1,
-    spaceBetween: 10,
+/* ================== PORTFOLIO POPUP SWIPER ================== */
+var workSwiper = new Swiper(".work-popup-card", {
+    spaceBetween: 24,
     loop: true,
+    grabCursor: true,
+
     pagination: {
       el: ".swiper-pagination",
-      clickable: true,
+      type: "progressbar",
     },
     autoplay: {
         delay: 5000,
         disableOnInteraction: false,
     },
     navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
     },
     breakpoints: {
-      350: {
-        slidesPerView: 1,
+        350: {
+            slidesPerView: 1
+          },
+        568: {
+            slidesPerView: 2
+          },
+        768: {
+          slidesPerView: 2
+        },
+        1024: {
+          slidesPerView: 3,
+          spaceBetween: 15,
+        },
       },
-      568: {
-        slidesPerView: 1,
-      },
-      768: {
-        slidesPerView: 3,
-        spaceBetween: 20,
-      },
-      1024: {
-        slidesPerView: 4,
-        spaceBetween: 30,
-      },
-    },
   });
+
+/* pop up */
+const work_button_popup = document.querySelectorAll('.work-button-popup');
+const work_popup = document.querySelectorAll('.work-popup');
+const work_popup_close = document.querySelectorAll('.work-popup-close');
+
+var popup = function(popupClick){
+    work_popup[popupClick].classList.add('active-work-popup');
+}
+
+work_button_popup.forEach((popupBtn, i) => {
+    popupBtn.addEventListener('click', () =>{
+        popup(i)
+    });
+})
+
+work_popup_close.forEach((popupClose) =>{
+    popupClose.addEventListener('click', () =>{
+        work_popup.forEach((workPopup) =>{
+            workPopup.classList.remove('active-work-popup')
+        })
+    })
+})
 
 /* ================== MIXITUP FILTER PORTFOLIO ==================== */
 let mixerPortfolio = mixitup('.work-container', {
